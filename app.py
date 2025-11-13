@@ -2,14 +2,8 @@ import streamlit as st
 import requests
 import time
 
-# -----------------------------
-# ⚙️ Ollama API Configuration
-# -----------------------------
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
-# -----------------------------
-# 🧠 Prompt Templates
-# -----------------------------
 TRANSLATION_PROMPT = """
 You are an expert multilingual code translator.
 Translate the following {source_lang} code into {target_lang}.
@@ -46,9 +40,6 @@ Compiler / Runtime Errors:
 {errors}
 """
 
-# -----------------------------
-# 🔍 Bracket Balance Checker
-# -----------------------------
 def check_bracket_balance(code: str):
     pairs = {"(": ")", "{": "}", "[": "]"}
     opens = []
@@ -69,9 +60,6 @@ def check_bracket_balance(code: str):
         issues.append(f"Unclosed '{o}' starting at position {idx}")
     return issues
 
-# -----------------------------
-# 🔁 Helper Functions
-# -----------------------------
 def generate_response(prompt, model):
     """Send prompt to Ollama API and return model response."""
     payload = {"model": model, "prompt": prompt, "stream": False}
@@ -115,9 +103,6 @@ def fix_code_errors(code, lang, errors, model, max_attempts=3):
     return "⚠️ Model could not fully fix the code after several attempts.\nLast Attempt:\n\n" + response
 
 
-# -----------------------------
-# 🖥️ Streamlit UI — Premium Design (Dark + Light + Glow)
-# -----------------------------
 st.set_page_config(page_title="AI Code Translator + Fixer", page_icon="💻", layout="wide")
 
 st.markdown("""
